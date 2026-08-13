@@ -10,11 +10,14 @@ const PHOTO_MASK = {
   maskComposite: 'intersect' as const,
 };
 
-const TEXT_SHADOW = {
-  background: [
-    'radial-gradient(ellipse 76% 58% at 38% 30%, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.52) 36%, rgba(0,0,0,0.12) 62%, rgba(0,0,0,0) 76%)',
-    'radial-gradient(ellipse 70% 46% at 40% 58%, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.26) 44%, rgba(0,0,0,0) 72%)',
-  ].join(', '),
+const BASE_GRADIENT = {
+  background:
+    'linear-gradient(to top, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.38) 14%, rgba(0,0,0,0.20) 28%, rgba(0,0,0,0.08) 40%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,0) 60%)',
+};
+
+const TEXT_RADIAL = {
+  background:
+    'radial-gradient(ellipse 72% 58% at 34% 42%, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.24) 30%, rgba(0,0,0,0.07) 52%, rgba(0,0,0,0) 70%)',
 };
 
 export function HomeHero() {
@@ -36,12 +39,18 @@ export function HomeHero() {
         className="pointer-events-none absolute top-1/2 left-1/2 z-0 h-auto w-auto max-h-[108%] max-w-[98vw] -translate-x-1/2 -translate-y-1/2 object-contain sm:max-h-[108%] sm:max-w-none md:left-[52%] lg:max-h-[109%] xl:left-[53%] xl:max-h-[110%] 2xl:left-[52%] 2xl:max-h-[110%]"
       />
 
+      <div
+        aria-hidden="true"
+        style={BASE_GRADIENT}
+        className="pointer-events-none absolute inset-0 z-[1]"
+      />
+
       <div className="relative z-10 flex h-full items-end md:items-center px-5 pb-12 sm:px-8 sm:pb-14 md:px-0 md:pb-0">
         <div className="relative w-full max-w-md text-left md:ml-[10vw] md:max-w-lg lg:ml-[14vw] lg:max-w-[min(32rem,34vw)] xl:ml-[16vw]">
           <div
             aria-hidden="true"
-            style={TEXT_SHADOW}
-            className="pointer-events-none absolute left-[-8%] top-[-8%] z-0 h-[108%] w-[18.5rem] max-w-[118%] opacity-80 sm:left-[-14%] sm:top-[-12%] sm:h-[118%] sm:w-[28rem] sm:opacity-90 md:left-[-18%] md:top-[-16%] md:h-[132%] md:w-[34rem] md:opacity-100 xl:w-[38rem]"
+            style={TEXT_RADIAL}
+            className="pointer-events-none absolute -inset-x-4 -inset-y-6 z-0 sm:-inset-x-6 sm:-inset-y-8 md:-inset-x-8 md:-inset-y-10"
           />
           <div className="relative z-[1]">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-amber-500 sm:text-sm">

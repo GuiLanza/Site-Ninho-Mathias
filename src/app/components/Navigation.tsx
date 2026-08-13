@@ -10,9 +10,8 @@ const EXPERIENCIAS_LINKS = [
 ];
 
 const navIdle =
-  'text-zinc-300 hover:text-amber-200 transition-colors duration-200';
-const navActive =
-  'bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent border-b-2 border-amber-400 pb-1';
+  'text-white/80 hover:text-white transition-colors duration-200';
+const navActive = 'text-amber-400 border-b border-amber-400 pb-1';
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,17 +25,14 @@ export function Navigation() {
   }, [location.pathname]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-black border-b border-white/10">
+    <nav className="sticky top-0 z-50 bg-black border-b border-white/[0.06]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link
-            to="/"
-            className="text-xl font-bold tracking-wider text-white lg:bg-[linear-gradient(90deg,#ffffff_8%,#e6e6e6_50%,#ffffff_92%)] lg:bg-clip-text lg:text-transparent"
-          >
+          <Link to="/" className="text-xl font-bold tracking-[0.16em] text-white">
             NINHO MATHIAS
           </Link>
 
-          <div className="hidden lg:flex items-center gap-5 xl:gap-7">
+          <div className="hidden lg:flex items-center gap-6">
             <Link
               to="/#agenda"
               className={`text-xs xl:text-sm uppercase tracking-wide whitespace-nowrap ${
@@ -73,7 +69,7 @@ export function Navigation() {
                         className={`block rounded-xl px-4 py-2 text-sm ${
                           location.pathname === item.path
                             ? 'text-amber-400'
-                            : 'text-zinc-300 hover:text-amber-200 hover:bg-white/5'
+                            : 'text-white/80 hover:text-white hover:bg-white/5'
                         }`}
                       >
                         {item.label}
