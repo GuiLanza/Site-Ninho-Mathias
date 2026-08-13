@@ -3,9 +3,9 @@ import { WHATSAPP_NUMBER } from '../../calculator/config';
 
 const PHOTO_MASK = {
   WebkitMaskImage:
-    'linear-gradient(to right, transparent 0%, black 18%, black 90%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 7%, black 95%, transparent 100%)',
+    'linear-gradient(to right, transparent 0%, black 16%, black 88%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 94%, transparent 100%)',
   maskImage:
-    'linear-gradient(to right, transparent 0%, black 18%, black 90%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 7%, black 95%, transparent 100%)',
+    'linear-gradient(to right, transparent 0%, black 16%, black 88%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 94%, transparent 100%)',
   WebkitMaskComposite: 'source-in',
   maskComposite: 'intersect' as const,
 };
@@ -26,11 +26,16 @@ export function HomeHero() {
         fetchPriority="high"
         decoding="async"
         style={PHOTO_MASK}
-        className="pointer-events-none absolute top-[4%] left-[58%] h-auto w-auto max-h-[90%] max-w-[78vw] -translate-x-1/2 object-contain object-top sm:top-[3%] sm:left-[60%] sm:max-h-[91%] sm:max-w-none md:left-[62%] lg:top-[2.5%] lg:left-[65%] lg:max-h-[90%] xl:left-[66%] xl:max-h-[88%] 2xl:left-[65%] 2xl:max-h-[86%]"
+        className="pointer-events-none absolute top-1/2 left-1/2 z-0 h-auto w-auto max-h-[93%] max-w-[90vw] -translate-x-1/2 -translate-y-1/2 object-contain sm:max-h-[94%] sm:max-w-none md:left-[52%] lg:max-h-[93%] xl:left-[53%] xl:max-h-[92%] 2xl:left-[52%] 2xl:max-h-[90%]"
       />
 
-      <div className="relative z-10 flex h-full items-end md:items-center px-5 pb-12 sm:px-8 sm:pb-14 md:pb-0">
-        <div className="w-full max-w-md text-left md:ml-[6vw] md:max-w-lg lg:ml-[8vw] lg:max-w-xl xl:ml-[10vw] xl:mr-[42vw]">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[12.5rem] sm:h-[14.5rem] lg:h-[16rem] bg-[linear-gradient(to_bottom,rgba(0,0,0,0.94)_0%,rgba(0,0,0,0.62)_18%,rgba(0,0,0,0.28)_42%,rgba(0,0,0,0.1)_68%,transparent_100%)]"
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 flex h-full items-end md:items-center px-5 pb-12 sm:px-8 sm:pb-14 md:px-0 md:pb-0">
+        <div className="w-full max-w-md text-left md:ml-[12vw] md:max-w-lg lg:ml-[16vw] lg:max-w-[min(32rem,36vw)] xl:ml-[18vw]">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-amber-500 sm:text-sm">
             Música ao vivo
           </p>
