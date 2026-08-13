@@ -8,34 +8,46 @@ export function HomeHero() {
   };
 
   return (
-    <section className="relative isolate bg-black lg:h-[calc(100svh-4rem)] lg:min-h-[38rem]">
-      <div className="flex h-full flex-col lg:flex-row">
-        <div className="relative order-1 flex w-full items-end justify-center bg-[#f3f3f3] aspect-[3/4] max-h-[70svh] sm:max-h-[74svh] lg:order-2 lg:aspect-auto lg:h-full lg:max-h-none lg:w-[46%] xl:w-[44%]">
-          <img
-            src="/em-cena/hero.jpg"
-            alt="Ninho Mathias com violão, em retrato de estúdio"
-            className="h-full w-full object-contain object-center"
-          />
-        </div>
+    <section className="relative isolate h-[calc(100svh-4rem)] min-h-[32rem] overflow-hidden bg-[#f3f3f3]">
+      <img
+        src="/em-cena/hero.jpg"
+        alt="Ninho Mathias com violão, em retrato de estúdio"
+        width={768}
+        height={1376}
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover object-[center_24%] sm:object-[center_20%] lg:object-[center_18%] xl:object-[center_16%]"
+      />
 
-        <div className="order-2 flex flex-1 flex-col justify-center px-4 py-10 sm:px-6 sm:py-14 lg:order-1 lg:w-[54%] lg:px-8 xl:px-16">
-          <div className="mx-auto w-full max-w-xl lg:mx-0 lg:max-w-lg xl:max-w-xl">
-            <p className="text-amber-400 text-xs sm:text-sm font-bold tracking-[0.28em] uppercase mb-5">
+      <div
+        className="pointer-events-none absolute inset-0 bg-white/15 lg:bg-white/10"
+        aria-hidden="true"
+      />
+
+      <div
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0.38)_28%,rgba(0,0,0,0.1)_55%,transparent_78%)] lg:bg-[radial-gradient(ellipse_70%_85%_at_18%_50%,rgba(0,0,0,0.52)_0%,rgba(0,0,0,0.22)_42%,transparent_74%),linear-gradient(90deg,rgba(0,0,0,0.22)_0%,rgba(0,0,0,0.08)_32%,transparent_52%)]"
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 flex h-full items-end lg:items-center">
+        <div className="w-full px-5 pb-14 sm:px-8 sm:pb-16 lg:px-0 lg:pb-0 lg:pl-[10vw] lg:pr-[48vw] xl:pl-[12vw] xl:pr-[50vw]">
+          <div className="mx-auto max-w-lg sm:max-w-xl lg:mx-0">
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-amber-400 sm:text-sm">
               Música ao vivo
             </p>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-bold text-white tracking-tight leading-[0.92]">
+            <h1 className="text-[clamp(2.75rem,8.4vw,7.25rem)] font-bold leading-[0.92] tracking-tight text-white">
               NINHO
               <span className="block">MATHIAS</span>
             </h1>
-            <p className="mt-6 sm:mt-8 text-lg sm:text-xl text-white/85 leading-relaxed max-w-md">
+            <p className="mt-6 max-w-md text-base leading-relaxed text-white/90 sm:mt-8 sm:text-lg lg:text-xl">
               Transforme seu evento em uma experiência musical inesquecível
             </p>
             <button
               type="button"
               onClick={handleScheduleShow}
-              className="mt-8 inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-amber-400 hover:bg-amber-500 text-black font-bold rounded-full transition-all duration-300 hover:scale-105 text-base sm:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="mt-8 inline-flex min-h-12 items-center gap-3 rounded-full bg-amber-400 px-8 py-4 text-base font-bold text-black transition-all duration-300 hover:scale-105 hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:min-h-14 sm:px-10 sm:py-5 sm:text-lg"
             >
-              <Phone className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
+              <Phone className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
               Agende seu Show
             </button>
           </div>
