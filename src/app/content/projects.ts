@@ -12,4 +12,4 @@ export const MUSICAL_PROJECTS = [
     description: 'Rock nacional dos anos 80 em formato de trio',
     category: 'Rock',
   },
-];
+] as const;

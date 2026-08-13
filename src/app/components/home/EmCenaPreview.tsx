@@ -1,8 +1,17 @@
 import { Link } from 'react-router';
 import { getEmCenaPreview } from '../../content/emCena';
 
+const PREVIEW_SPANS = [
+  'col-span-2 row-span-2 md:col-span-6',
+  'col-span-1 md:col-span-3',
+  'col-span-1 md:col-span-3',
+  'col-span-1 md:col-span-4',
+  'col-span-1 md:col-span-4',
+  'col-span-2 md:col-span-4',
+];
+
 export function EmCenaPreview() {
-  const preview = getEmCenaPreview();
+  const preview = getEmCenaPreview(6);
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
@@ -22,23 +31,30 @@ export function EmCenaPreview() {
       </div>
 
       {preview.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[160px] md:auto-rows-[220px]">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-2 sm:gap-3 md:gap-4 auto-rows-[7.5rem] sm:auto-rows-[10rem] md:auto-rows-[12.5rem] lg:auto-rows-[14.5rem]">
           {preview.map((image, index) => (
             <Link
               key={image.id}
               to="/em-cena"
               className={`group relative overflow-hidden rounded-2xl border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
-                index === 0 ? 'col-span-2 row-span-2' : ''
+                PREVIEW_SPANS[index] ?? 'col-span-1 md:col-span-3'
               }`}
             >
               <img
                 src={image.src}
                 alt={image.alt}
-                loading="lazy"
+                loading={index < 2 ? 'eager' : 'lazy'}
                 decoding="async"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${
+                  image.focal ?? 'object-center'
+                }`}
               />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              {image.title ? (
+                <span className="absolute bottom-3 left-3 right-3 text-white text-sm font-semibold drop-shadow-md opacity-0 sm:opacity-100 sm:translate-y-1 sm:group-hover:translate-y-0 transition-all">
+                  {image.title}
+                </span>
+              ) : null}
             </Link>
           ))}
         </div>

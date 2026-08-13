@@ -1,46 +1,15 @@
-import { Music, Phone } from 'lucide-react';
+import { Music } from 'lucide-react';
 import { Link } from 'react-router';
-import { WHATSAPP_NUMBER } from '../calculator/config';
 import { AboutSection } from '../components/home/AboutSection';
 import { AgendaCalendar } from '../components/home/AgendaCalendar';
 import { EmCenaPreview } from '../components/home/EmCenaPreview';
+import { HomeHero } from '../components/home/HomeHero';
 import { UpcomingShows } from '../components/home/UpcomingShows';
 
 export function Home() {
-  const handleScheduleShow = () => {
-    const message = 'Olá! Quero agendar um show.';
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black">
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-black/55 z-10" />
-        <img
-          src="/em-cena/vocal-palco.jpg"
-          alt="Ninho Mathias cantando no palco"
-          className="absolute inset-0 w-full h-full object-cover object-[center_20%]"
-        />
-        <div className="relative z-20 text-center px-4">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 tracking-tight">
-            NINHO MATHIAS
-          </h1>
-          <div className="max-w-2xl mx-auto">
-            <p className="text-xl md:text-2xl text-white/90 mb-8">
-              Transforme seu evento em uma experiência musical inesquecível
-            </p>
-            <button
-              type="button"
-              onClick={handleScheduleShow}
-              className="inline-flex items-center gap-3 px-10 py-5 bg-amber-400 hover:bg-amber-500 text-black font-bold rounded-full transition-all duration-300 hover:scale-105 text-lg"
-            >
-              <Phone className="w-6 h-6" />
-              Agende seu Show
-            </button>
-          </div>
-        </div>
-      </section>
-
+      <HomeHero />
       <AboutSection />
       <UpcomingShows />
       <AgendaCalendar />
