@@ -16,7 +16,7 @@ export function HomeHero() {
         height={1376}
         fetchPriority="high"
         decoding="async"
-        className="absolute inset-0 h-full w-full object-cover object-[center_24%] sm:object-[center_20%] lg:object-[center_18%] xl:object-[center_16%]"
+        className="absolute inset-0 h-full w-full object-cover object-[center_28%] sm:object-[center_27%] lg:object-[center_26%] xl:object-[center_24%]"
       />
 
       <div
