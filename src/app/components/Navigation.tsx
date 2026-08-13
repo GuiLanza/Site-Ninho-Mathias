@@ -9,6 +9,11 @@ const EXPERIENCIAS_LINKS = [
   { path: '/experiencias-musicais/projetos', label: 'Projetos' },
 ];
 
+const navIdle =
+  'text-zinc-300 hover:text-amber-200 transition-colors duration-200';
+const navActive =
+  'bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent border-b-2 border-amber-400 pb-1';
+
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [experienciasOpen, setExperienciasOpen] = useState(false);
@@ -21,10 +26,13 @@ export function Navigation() {
   }, [location.pathname]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
+    <nav className="sticky top-0 z-50 bg-black border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="text-white text-xl font-bold tracking-wider hover:text-amber-400 transition-colors">
+          <Link
+            to="/"
+            className="text-xl font-bold tracking-wider text-white lg:bg-[linear-gradient(90deg,#ffffff_8%,#e6e6e6_50%,#ffffff_92%)] lg:bg-clip-text lg:text-transparent"
+          >
             NINHO MATHIAS
           </Link>
 
@@ -32,7 +40,7 @@ export function Navigation() {
             <Link
               to="/#agenda"
               className={`text-xs xl:text-sm uppercase tracking-wide whitespace-nowrap ${
-                location.pathname === '/' ? 'text-amber-400 border-b-2 border-amber-400 pb-1' : 'text-white/80 hover:text-white'
+                location.pathname === '/' ? navActive : navIdle
               }`}
             >
               Agenda
@@ -46,7 +54,7 @@ export function Navigation() {
               <button
                 type="button"
                 className={`inline-flex items-center gap-1 text-xs xl:text-sm uppercase tracking-wide whitespace-nowrap ${
-                  experienciasActive ? 'text-amber-400' : 'text-white/80 hover:text-white'
+                  experienciasActive ? 'text-amber-400' : navIdle
                 }`}
                 aria-expanded={experienciasOpen}
                 aria-haspopup="true"
@@ -65,7 +73,7 @@ export function Navigation() {
                         className={`block rounded-xl px-4 py-2 text-sm ${
                           location.pathname === item.path
                             ? 'text-amber-400'
-                            : 'text-white/80 hover:text-white hover:bg-white/5'
+                            : 'text-zinc-300 hover:text-amber-200 hover:bg-white/5'
                         }`}
                       >
                         {item.label}
@@ -79,9 +87,7 @@ export function Navigation() {
             <Link
               to="/em-cena"
               className={`text-xs xl:text-sm uppercase tracking-wide whitespace-nowrap ${
-                location.pathname === '/em-cena'
-                  ? 'text-amber-400 border-b-2 border-amber-400 pb-1'
-                  : 'text-white/80 hover:text-white'
+                location.pathname === '/em-cena' ? navActive : navIdle
               }`}
             >
               Em Cena
@@ -89,9 +95,7 @@ export function Navigation() {
             <Link
               to="/calculadora"
               className={`text-xs xl:text-sm uppercase tracking-wide whitespace-nowrap ${
-                location.pathname === '/calculadora'
-                  ? 'text-amber-400 border-b-2 border-amber-400 pb-1'
-                  : 'text-white/80 hover:text-white'
+                location.pathname === '/calculadora' ? navActive : navIdle
               }`}
             >
               Planeje sua Experiência
@@ -99,9 +103,7 @@ export function Navigation() {
             <Link
               to="/agende-show"
               className={`text-xs xl:text-sm uppercase tracking-wide whitespace-nowrap ${
-                location.pathname.startsWith('/agende-show')
-                  ? 'text-amber-400 border-b-2 border-amber-400 pb-1'
-                  : 'text-white/80 hover:text-white'
+                location.pathname.startsWith('/agende-show') ? navActive : navIdle
               }`}
             >
               Agende seu Show
