@@ -8,7 +8,7 @@ export function HomeHero() {
   };
 
   return (
-    <section className="relative isolate h-[calc(100svh-4rem)] min-h-[32rem] overflow-hidden bg-[#f3f3f3]">
+    <section className="relative isolate h-[calc(100svh-4rem)] min-h-[32rem] overflow-hidden bg-white">
       <img
         src="/em-cena/hero.jpg"
         alt="Ninho Mathias com violão, em retrato de estúdio"
@@ -16,16 +16,11 @@ export function HomeHero() {
         height={1376}
         fetchPriority="high"
         decoding="async"
-        className="pointer-events-none absolute left-1/2 top-[44%] h-[148%] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 sm:h-[158%] md:h-[170%] lg:h-[200%] xl:h-[210%] 2xl:h-[200%]"
+        className="pointer-events-none absolute top-[3.5%] left-1/2 h-auto w-auto max-h-[90%] max-w-[94vw] -translate-x-1/2 object-contain object-top sm:top-[3%] sm:max-h-[91%] md:left-[52%] lg:top-[2.5%] lg:left-[54%] lg:max-h-[90%] lg:max-w-none xl:left-[55%] xl:max-h-[88%] 2xl:max-h-[86%]"
       />
 
       <div
-        className="pointer-events-none absolute inset-0 bg-white/25 lg:bg-white/20"
-        aria-hidden="true"
-      />
-
-      <div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.62)_0%,rgba(0,0,0,0.32)_38%,rgba(0,0,0,0.12)_68%,transparent_88%)] lg:bg-[radial-gradient(ellipse_80%_70%_at_50%_48%,rgba(0,0,0,0.4)_0%,rgba(0,0,0,0.16)_48%,transparent_76%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_95%_80%_at_50%_48%,rgba(0,0,0,0.38)_0%,rgba(0,0,0,0.16)_46%,transparent_74%)] lg:bg-[radial-gradient(ellipse_80%_70%_at_42%_48%,rgba(0,0,0,0.36)_0%,rgba(0,0,0,0.14)_48%,transparent_76%)]"
         aria-hidden="true"
       />
 
