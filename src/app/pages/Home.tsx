@@ -1,4 +1,5 @@
 import { Calendar, MapPin, Music, Info, Phone, Guitar, Music2 } from 'lucide-react';
+import { Link } from 'react-router';
 
 export function Home() {
   // Mock data para eventos da agenda - 3 próximos eventos
@@ -257,13 +258,29 @@ export function Home() {
             Shows personalizados, assessoria musical, produção de eventos e muito mais. 
             Entre em contato e descubra como podemos tornar seu evento inesquecível.
           </p>
-          <button
-            onClick={handleScheduleShow}
-            className="inline-flex items-center gap-3 px-10 py-5 bg-amber-400 hover:bg-amber-500 text-black font-bold rounded-full transition-all duration-300 hover:scale-105 text-lg shadow-xl"
-          >
-            <Phone className="w-6 h-6" />
-            Entre em Contato
-          </button>
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={handleScheduleShow}
+              className="inline-flex items-center gap-3 px-10 py-5 bg-amber-400 hover:bg-amber-500 text-black font-bold rounded-full transition-all duration-300 hover:scale-105 text-lg shadow-xl"
+            >
+              <Phone className="w-6 h-6" />
+              Entre em Contato
+            </button>
+            <Link
+              to="/calculadora"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-transparent hover:bg-amber-400 text-amber-400 hover:text-black font-bold rounded-full border-2 border-amber-400 transition-all duration-300 hover:scale-105 text-lg"
+            >
+              Simular formação
+            </Link>
+            </div>
+            <Link
+              to="/eventos"
+              className="text-white/70 hover:text-amber-400 transition-colors text-sm font-semibold underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded"
+            >
+              Conheça todos os tipos de eventos
+            </Link>
+          </div>
         </div>
       </section>
     </div>

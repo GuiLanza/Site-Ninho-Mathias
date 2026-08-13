@@ -8,7 +8,9 @@ export function Navigation() {
 
   const navItems = [
     { path: '/', label: 'Agenda' },
+    { path: '/eventos', label: 'Eventos' },
     { path: '/projetos', label: 'Projetos' },
+    { path: '/calculadora', label: 'Calculadora' },
     { path: '/agende-show', label: 'Agende seu Show' },
   ];
 
@@ -24,12 +26,12 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-7">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm uppercase tracking-wide transition-all duration-300 ${
+                className={`text-xs lg:text-sm uppercase tracking-wide transition-all duration-300 whitespace-nowrap ${
                   isActive(item.path)
                     ? 'text-amber-400 border-b-2 border-amber-400 pb-1'
                     : 'text-white/80 hover:text-white'
@@ -43,8 +45,10 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white hover:text-amber-400 transition-colors"
-            aria-label="Toggle menu"
+            className="lg:hidden text-white hover:text-amber-400 transition-colors"
+            aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={isMenuOpen}
+            aria-controls="menu-principal"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -52,7 +56,7 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden pb-4">
+          <div id="menu-principal" className="lg:hidden pb-4">
             {navItems.map((item) => (
               <Link
                 key={item.path}

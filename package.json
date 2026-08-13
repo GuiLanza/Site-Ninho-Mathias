@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "verify:calculator": "npx --yes tsx src/app/calculator/verify-scenarios.ts"
   },
   "dependencies": {
     "react": "18.3.1",
