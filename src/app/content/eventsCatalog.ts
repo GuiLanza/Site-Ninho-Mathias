@@ -5,7 +5,6 @@ export interface CatalogEvent {
   title: string;
   description: string;
   featured?: boolean;
-  calculatorHint?: string;
   ceremonyNote?: string;
 }
 
@@ -27,6 +26,8 @@ export interface MusicalFormat {
   formation: string;
   possibilities?: string[];
   complement?: string;
+  suitedFor?: string[];
+  criteria?: string[];
   presenceLabel: string;
   presenceTags: string[];
   musicians: number;
@@ -47,29 +48,28 @@ export const EVENT_GROUPS: CatalogEventGroup[] = [
         id: 'casamentos',
         title: 'Casamentos',
         description:
-          'Música para cerimônias, recepções, coquetéis e momentos especiais do casamento.',
+          'Uma experiência musical pensada para acompanhar um dos momentos mais importantes da celebração, da recepção à festa, com repertório e formação alinhados ao estilo dos noivos.',
       },
       {
         id: 'cerimonias',
         title: 'Cerimônias',
         description:
-          'Uma experiência musical cuidadosamente planejada para acompanhar momentos marcantes e emocionantes.',
+          'Música pensada para acompanhar momentos simbólicos e especiais, como entradas, homenagens, celebrações e outros momentos importantes.',
         featured: true,
-        calculatorHint: 'Recomendação personalizada disponível',
         ceremonyNote:
-          'Momentos musicais definidos de acordo com a programação da cerimônia.',
+          'Momentos musicais definidos de acordo com a programação da cerimônia — não se trata de um show tradicional.',
       },
       {
         id: 'aniversarios',
         title: 'Aniversários',
         description:
-          'Repertório e formação musical para comemorações intimistas ou grandes celebrações.',
+          'Música ao vivo para transformar a comemoração em uma experiência ainda mais especial, com repertório adaptado ao perfil do aniversariante e dos convidados.',
       },
       {
         id: 'formaturas',
         title: 'Formaturas',
         description:
-          'Uma apresentação pensada para acompanhar cada momento da celebração e criar uma atmosfera especial.',
+          'Uma trilha musical para celebrar conquistas e marcar o encerramento de um ciclo, criando uma atmosfera envolvente para formandos, familiares e convidados.',
       },
     ],
   },
@@ -81,31 +81,31 @@ export const EVENT_GROUPS: CatalogEventGroup[] = [
         id: 'corporativos',
         title: 'Eventos corporativos',
         description:
-          'Música ao vivo para confraternizações, encontros empresariais, celebrações e eventos institucionais.',
+          'Apresentações pensadas para confraternizações, encontros empresariais, premiações e eventos institucionais, respeitando o perfil da empresa e da ocasião.',
       },
       {
         id: 'lancamentos',
         title: 'Lançamentos de produtos e inaugurações',
         description:
-          'Uma experiência musical para valorizar a apresentação de novos produtos, marcas, espaços e negócios.',
+          'Música ao vivo para complementar a experiência de marca e criar atmosfera em lançamentos, inaugurações e ativações.',
       },
       {
         id: 'coqueteis',
         title: 'Coquetéis e recepções',
         description:
-          'Formato ideal para criar uma atmosfera sofisticada e agradável durante a chegada e interação dos convidados.',
+          'Uma proposta musical elegante e versátil para momentos de integração, recepção de convidados e eventos sociais ou profissionais.',
       },
       {
         id: 'feiras',
         title: 'Feiras e exposições',
         description:
-          'Apresentações adaptadas ao ambiente, à circulação de pessoas e à dinâmica do evento.',
+          'Apresentações que ajudam a criar uma atmosfera agradável e diferenciada em estandes, feiras, exposições e eventos de relacionamento.',
       },
       {
         id: 'culturais',
         title: 'Eventos culturais',
         description:
-          'Música ao vivo para projetos culturais, encontros, apresentações e experiências artísticas.',
+          'Projetos musicais adaptáveis a programações culturais, eventos públicos e iniciativas artísticas, respeitando a proposta de cada ocasião.',
       },
     ],
   },
@@ -116,43 +116,32 @@ export const EVENT_GROUPS: CatalogEventGroup[] = [
       {
         id: 'festivais',
         title: 'Festivais',
-        description: 'Formações e repertórios adaptáveis à estrutura e à proposta do festival.',
+        description:
+          'Shows preparados para diferentes tipos de palco e público, com repertório, formação e dinâmica definidos de acordo com a proposta do festival.',
       },
       {
         id: 'bares',
         title: 'Bares e restaurantes',
         description:
-          'Apresentações pensadas para complementar a experiência dos clientes sem comprometer a dinâmica do estabelecimento.',
+          'Música ao vivo pensada para complementar a experiência do ambiente, respeitando a identidade do estabelecimento e o perfil do público.',
       },
       {
         id: 'hoteis',
         title: 'Hotéis e resorts',
         description:
-          'Música para recepções, áreas sociais, eventos especiais, confraternizações e experiências para hóspedes.',
+          'Apresentações para áreas de convivência, restaurantes, eventos internos, celebrações e experiências especiais para hóspedes.',
       },
       {
         id: 'clubes',
         title: 'Eventos em clubes',
         description:
-          'Apresentações para festas, confraternizações, celebrações e eventos sociais.',
+          'Música ao vivo para festas, confraternizações, eventos sociais e programações especiais.',
       },
       {
         id: 'condominios',
         title: 'Eventos em condomínios',
         description:
-          'Música ao vivo para festas, encontros de moradores, confraternizações e eventos especiais.',
-      },
-    ],
-  },
-  {
-    id: 'desenvolvimento',
-    title: 'Desenvolvimento musical',
-    items: [
-      {
-        id: 'aulas-canto',
-        title: 'Aulas de canto',
-        description:
-          'Aulas voltadas ao desenvolvimento vocal, interpretação, técnica e prática musical.',
+          'Apresentações para confraternizações, datas comemorativas e eventos de integração entre moradores, com formato adequado ao espaço.',
       },
     ],
   },
@@ -164,18 +153,26 @@ export const MUSICAL_FORMATS: MusicalFormat[] = [
     title: 'Solo',
     subtitle: 'Voz + Violão',
     description:
-      'Uma formação versátil e elegante, ideal para eventos que buscam uma experiência musical mais intimista.',
-    durationLabel: 'Duração do evento',
-    duration: '3 a 4 horas',
+      'Uma formação intimista, elegante e versátil, ideal para eventos em que a música deve estar presente de forma próxima e envolvente.',
+    durationLabel: 'Duração da experiência',
+    duration: 'até 4 horas',
     includes: [
-      'Montagem e preparação',
-      'Passagem de som',
-      'Até 2h30 de música distribuídas ao longo do evento',
-      'Intervalos estratégicos',
-      'Desmontagem',
+      'preparação e montagem',
+      'passagem de som',
+      'música ao vivo distribuída ao longo do evento',
+      'intervalos planejados',
+      'desmontagem',
     ],
     formationLabel: 'Formação',
     formation: 'Voz + Violão',
+    suitedFor: [
+      'cerimônias',
+      'recepções',
+      'coquetéis',
+      'restaurantes',
+      'aniversários',
+      'eventos de pequeno e médio porte',
+    ],
     presenceLabel: 'Essencial',
     presenceTags: ['Intimista', 'Elegante'],
     musicians: 1,
@@ -183,27 +180,27 @@ export const MUSICAL_FORMATS: MusicalFormat[] = [
   {
     id: 'trio',
     title: 'Trio',
-    subtitle: 'Uma formação versátil e personalizada',
+    subtitle: 'Mais possibilidades sonoras em uma formação compacta',
     description:
-      'O trio oferece mais possibilidades sonoras, mantendo uma estrutura compacta e adequada para diferentes ambientes.',
-    durationLabel: 'Duração do evento',
-    duration: '3 a 4 horas',
+      'O trio amplia a presença musical sem exigir toda a estrutura de uma banda completa. A combinação dos instrumentos pode ser personalizada de acordo com o evento.',
+    durationLabel: 'Duração da experiência',
+    duration: 'até 4 horas',
     includes: [
-      'Montagem dos equipamentos',
-      'Passagem de som',
-      'Até 2h30 a 3h de música distribuídas em blocos',
-      'Intervalos',
-      'Desmontagem',
+      'montagem dos equipamentos',
+      'passagem de som',
+      'música ao vivo distribuída em blocos',
+      'intervalos planejados',
+      'desmontagem',
     ],
-    formationLabel: 'Possibilidades',
+    formationLabel: 'Possibilidades de formação',
     formation: 'Definida de acordo com a proposta do evento e a acústica do local.',
     possibilities: [
       'Voz + Teclado + Bateria',
       'Voz + Violão + Bateria',
       'Voz + Violão + Teclado',
+      'Outras combinações conforme a proposta',
     ],
-    complement:
-      'Outras combinações podem ser definidas de acordo com a necessidade, a acústica e a proposta do evento.',
+    criteria: ['estilo desejado', 'repertório', 'espaço', 'público', 'acústica', 'estrutura disponível'],
     presenceLabel: 'Equilibrado',
     presenceTags: ['Versátil', 'Mais presença'],
     musicians: 3,
@@ -213,20 +210,33 @@ export const MUSICAL_FORMATS: MusicalFormat[] = [
     title: 'Banda',
     subtitle: 'Uma experiência musical completa',
     description:
-      'Para eventos que pedem uma sonoridade mais encorpada, a banda oferece uma formação completa, dinâmica e com maior presença de palco.',
-    durationLabel: 'Duração do evento',
-    duration: '3 a 4 horas',
+      'Para eventos que pedem mais energia, presença de palco e uma sonoridade mais encorpada.',
+    durationLabel: 'Duração da experiência',
+    duration: 'até 4 horas',
     includes: [
-      'Montagem dos equipamentos',
-      'Passagem de som',
-      'Até 2h30 a 3h de show distribuídas em blocos',
-      'Intervalos',
-      'Desmontagem',
+      'montagem dos equipamentos',
+      'passagem de som',
+      'show distribuído em blocos',
+      'intervalos',
+      'desmontagem',
     ],
-    formationLabel: 'Formação',
+    formationLabel: 'Formação base',
     formation: 'Vocal + Violão + Guitarra + Baixo + Teclado + Bateria',
-    complement:
-      'A formação também pode ser ajustada de acordo com o tamanho, a estrutura e a proposta do evento.',
+    suitedFor: [
+      'festas',
+      'casamentos',
+      'eventos corporativos',
+      'formaturas',
+      'festivais',
+      'eventos em que a música tenha maior protagonismo',
+    ],
+    criteria: [
+      'tamanho do evento',
+      'espaço',
+      'estrutura disponível',
+      'público',
+      'proposta musical',
+    ],
     presenceLabel: 'Completo',
     presenceTags: ['Impactante', 'Experiência de palco'],
     musicians: 6,
@@ -276,10 +286,35 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
     description:
       'Site oficial de Ninho Mathias. Música ao vivo para casamentos, cerimônias, eventos corporativos e celebrações.',
   },
-  '/eventos': {
-    title: 'Música para Eventos | Ninho Mathias',
+  '/experiencias-musicais': {
+    title: 'Experiências Musicais | Ninho Mathias',
     description:
-      'Música ao vivo para casamentos, cerimônias, eventos corporativos, festas e celebrações. Escolha entre Solo, Trio ou Banda e encontre a formação ideal para seu evento.',
+      'Eventos, formações musicais, aulas de canto e projetos com Ninho Mathias. Encontre a experiência certa para cada ocasião.',
+  },
+  '/experiencias-musicais/eventos': {
+    title: 'Eventos | Experiências Musicais | Ninho Mathias',
+    description:
+      'Música ao vivo para casamentos, cerimônias, eventos corporativos, festas e celebrações, com formação pensada para cada ocasião.',
+  },
+  '/experiencias-musicais/formacoes': {
+    title: 'Formações | Experiências Musicais | Ninho Mathias',
+    description:
+      'Solo, Trio ou Banda: conheça as formações musicais de Ninho Mathias e encontre a presença ideal para o seu evento.',
+  },
+  '/experiencias-musicais/aulas-de-canto': {
+    title: 'Aulas de Canto | Ninho Mathias',
+    description:
+      'Aulas de canto personalizadas com Ninho Mathias: técnica, interpretação, repertório e identidade vocal, em sessões de 50 minutos a 1 hora.',
+  },
+  '/experiencias-musicais/projetos': {
+    title: 'Projetos Musicais | Ninho Mathias',
+    description:
+      'Conheça os projetos musicais de Ninho Mathias, incluindo Bloco Eu Te Devoro e Tri 80.',
+  },
+  '/em-cena': {
+    title: 'Em Cena | Ninho Mathias',
+    description:
+      'Palco, música, encontros e momentos da trajetória artística de Ninho Mathias.',
   },
   '/projetos': {
     title: 'Projetos Musicais | Ninho Mathias',
@@ -287,13 +322,13 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
       'Conheça os projetos musicais de Ninho Mathias, incluindo Bloco Eu Te Devoro e Tri 80.',
   },
   '/calculadora': {
-    title: 'Calculadora de Eventos | Ninho Mathias',
+    title: 'Planeje sua Experiência | Ninho Mathias',
     description:
-      'Descubra se Solo, Trio ou Banda é a formação ideal para o seu evento, de acordo com público, espaço e acústica.',
+      'Conte sobre o evento, o espaço e o público e receba uma indicação entre Solo, Trio e Banda.',
   },
   '/agende-show': {
     title: 'Agende seu Show | Ninho Mathias',
     description:
-      'Solicite um orçamento para apresentação ao vivo com Ninho Mathias. Informe data, local e tipo de evento.',
+      'Solicite um orçamento para apresentação ao vivo ou aula de canto com Ninho Mathias.',
   },
 };

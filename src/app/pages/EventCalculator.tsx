@@ -46,11 +46,11 @@ export function EventCalculator() {
         <div className="relative max-w-7xl mx-auto text-center">
           <Calculator className="w-12 h-12 text-amber-400 mx-auto mb-6" aria-hidden="true" />
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            CALCULADORA DE EVENTOS
+            Planeje sua Experiência
           </h1>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Descubra a formação ideal — Solo, Trio ou Banda — de acordo com o tipo de evento,
-            o público e a estrutura do local.
+            Conte sobre a ocasião, o espaço e o público. Indicamos entre Solo, Trio e Banda a
+            formação mais adequada para o seu evento.
           </p>
         </div>
       </section>

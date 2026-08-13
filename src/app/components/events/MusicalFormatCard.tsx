@@ -1,4 +1,3 @@
-import { Link } from 'react-router';
 import type { MusicalFormat } from '../../content/eventsCatalog';
 
 interface MusicalFormatCardProps {
@@ -11,7 +10,7 @@ export function MusicalFormatCard({ format }: MusicalFormatCardProps) {
 
   return (
     <article
-      className={`flex flex-col rounded-2xl border p-6 sm:p-8 transition-all duration-300 hover:scale-[1.01] ${
+      className={`flex flex-col rounded-2xl border p-6 sm:p-8 transition-all duration-300 ${
         isBanda
           ? 'border-amber-400 bg-zinc-900'
           : isTrio
@@ -40,6 +39,24 @@ export function MusicalFormatCard({ format }: MusicalFormatCardProps) {
       <h3 className="text-3xl md:text-4xl font-bold text-white">{format.title}</h3>
       <p className="text-amber-400 font-semibold mt-2">{format.subtitle}</p>
       <p className="text-white/70 leading-relaxed mt-4">{format.description}</p>
+
+      {format.suitedFor ? (
+        <div className="mt-6">
+          <h4 className="text-sm font-bold uppercase tracking-wide text-amber-400 mb-3">
+            Funciona especialmente bem para
+          </h4>
+          <ul className="flex flex-wrap gap-2">
+            {format.suitedFor.map((item) => (
+              <li
+                key={item}
+                className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-sm text-white/80"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       <div className="mt-6 rounded-xl border border-white/10 bg-black/30 p-4">
         <p className="text-xs uppercase tracking-wide text-white/50 mb-1">{format.durationLabel}</p>
@@ -78,19 +95,23 @@ export function MusicalFormatCard({ format }: MusicalFormatCardProps) {
         ) : null}
       </div>
 
+      {format.criteria ? (
+        <div className="mt-6">
+          <h4 className="text-sm font-bold uppercase tracking-wide text-amber-400 mb-3">
+            A definição considera
+          </h4>
+          <ul className="space-y-1 text-white/70 text-sm">
+            {format.criteria.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
       <p className="mt-6 text-sm text-white/50">
         {format.musicians === 1 ? '1 músico' : `${format.musicians} músicos`}
         {format.presenceTags.map((tag) => ` · ${tag}`).join('')}
       </p>
-
-      <div className="mt-auto pt-8">
-        <Link
-          to="/calculadora"
-          className="inline-flex w-full items-center justify-center px-6 py-3 bg-amber-400 hover:bg-amber-500 text-black font-bold rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
-        >
-          Ver se é ideal para meu evento
-        </Link>
-      </div>
     </article>
   );
 }

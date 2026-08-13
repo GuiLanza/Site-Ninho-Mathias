@@ -16,6 +16,24 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      '/api/calendar.ics': {
+        target: 'https://calendar.google.com',
+        changeOrigin: true,
+        rewrite: () => '/calendar/ical/ninhomathias.nm%40gmail.com/public/basic.ics',
+      },
+    },
+  },
+  preview: {
+    proxy: {
+      '/api/calendar.ics': {
+        target: 'https://calendar.google.com',
+        changeOrigin: true,
+        rewrite: () => '/calendar/ical/ninhomathias.nm%40gmail.com/public/basic.ics',
+      },
+    },
+  },
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],

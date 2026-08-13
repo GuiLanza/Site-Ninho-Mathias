@@ -1,4 +1,3 @@
-import { Link } from 'react-router';
 import type { CatalogEvent } from '../../content/eventsCatalog';
 
 interface EventTypeCardProps {
@@ -25,14 +24,6 @@ export function EventTypeCard({ event }: EventTypeCardProps) {
         <p className="mt-4 text-sm text-white/80 leading-relaxed border-t border-white/10 pt-4">
           {event.ceremonyNote}
         </p>
-      ) : null}
-      {event.calculatorHint ? (
-        <Link
-          to="/calculadora"
-          className="inline-flex mt-5 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded"
-        >
-          {event.calculatorHint}
-        </Link>
       ) : null}
     </article>
   );

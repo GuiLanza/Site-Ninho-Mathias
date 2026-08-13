@@ -1,26 +1,42 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router';
 import { Calendar, MapPin, User, Phone, Briefcase, Send } from 'lucide-react';
 
+const EVENT_TYPE_OPTIONS = [
+  'Aula de Canto',
+  'Empresarial',
+  'Aniversário',
+  'Show',
+  'Casamento',
+  'Outro',
+];
+
 export function ScheduleShow() {
+  const [searchParams] = useSearchParams();
+  const requestedType = searchParams.get('tipo');
+  const initialType = requestedType && EVENT_TYPE_OPTIONS.includes(requestedType) ? requestedType : '';
+
   const [formData, setFormData] = useState({
     name: '',
     date: '',
     location: '',
     whatsapp: '',
-    eventType: '',
+    eventType: initialType,
   });
+  const isLesson = formData.eventType === 'Aula de Canto';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Formata a mensagem para WhatsApp
-    const message = `Olá! Gostaria de agendar um show com as seguintes informações:
+    const isAula = formData.eventType === 'Aula de Canto';
+    const message = `Olá! Gostaria de agendar ${isAula ? 'uma aula de canto' : 'um show'} com as seguintes informações:
 
 📝 *Nome:* ${formData.name}
-📅 *Data do Evento:* ${formData.date}
+📅 *Data:* ${formData.date}
 📍 *Local:* ${formData.location}
 📱 *WhatsApp:* ${formData.whatsapp}
-🎭 *Tipo de Evento:* ${formData.eventType}
+🎭 *Tipo:* ${formData.eventType}
 
 Aguardo retorno!`;
 
@@ -45,10 +61,12 @@ Aguardo retorno!`;
         <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 via-transparent to-amber-500/5" />
         <div className="relative max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            AGENDE SEU SHOW
+            {isLesson ? 'AGENDAR AULA DE CANTO' : 'AGENDE SEU SHOW'}
           </h1>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Preencha o formulário abaixo e entraremos em contato via WhatsApp
+            {isLesson
+              ? 'Preencha o formulário e conversamos sobre sua experiência, objetivos e o que você gostaria de desenvolver.'
+              : 'Preencha o formulário abaixo e entraremos em contato via WhatsApp'}
           </p>
         </div>
       </section>
@@ -143,23 +161,13 @@ Aguardo retorno!`;
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-amber-400 focus:bg-white/10 transition-all"
               >
                 <option value="" disabled className="bg-zinc-900">
-                  Selecione o tipo de evento
+                  Selecione o tipo
                 </option>
-                <option value="Empresarial" className="bg-zinc-900">
-                  Empresarial
-                </option>
-                <option value="Aniversário" className="bg-zinc-900">
-                  Aniversário
-                </option>
-                <option value="Show" className="bg-zinc-900">
-                  Show
-                </option>
-                <option value="Casamento" className="bg-zinc-900">
-                  Casamento
-                </option>
-                <option value="Outro" className="bg-zinc-900">
-                  Outro
-                </option>
+                {EVENT_TYPE_OPTIONS.map((option) => (
+                  <option key={option} value={option} className="bg-zinc-900">
+                    {option}
+                  </option>
+                ))}
               </select>
             </div>
 
