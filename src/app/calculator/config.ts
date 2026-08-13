@@ -135,10 +135,10 @@ function showRule(
 }
 
 export const EVENT_RULES: Record<EventTypeId, EventRule> = {
-  CASAMENTO: showRule('CASAMENTO', 'Casamento', { solo: 2, trio: 4, banda: 3 }),
+  CASAMENTO: showRule('CASAMENTO', 'Casamentos', { solo: 2, trio: 4, banda: 3 }),
   CERIMONIA: {
     id: 'CERIMONIA',
-    label: 'Cerimônia',
+    label: 'Cerimônias',
     helperText: CEREMONY_CONFIG.helperText,
     baseScores: CEREMONY_CONFIG.scores.base,
     audienceScores: CEREMONY_CONFIG.scores.audience,
@@ -148,24 +148,24 @@ export const EVENT_RULES: Record<EventTypeId, EventRule> = {
     momentsText: CEREMONY_CONFIG.momentsText,
     resultCopy: CEREMONY_CONFIG.resultCopy,
   },
-  ANIVERSARIO: showRule('ANIVERSARIO', 'Aniversário', { solo: 2, trio: 4, banda: 3 }),
-  FORMATURA: showRule('FORMATURA', 'Formatura', { solo: 1, trio: 3, banda: 4 }),
-  CORPORATIVO: showRule('CORPORATIVO', 'Evento corporativo', { solo: 3, trio: 4, banda: 2 }),
-  LANCAMENTO: showRule('LANCAMENTO', 'Lançamento de produto / Inauguração', {
+  ANIVERSARIO: showRule('ANIVERSARIO', 'Aniversários', { solo: 2, trio: 4, banda: 3 }),
+  FORMATURA: showRule('FORMATURA', 'Formaturas', { solo: 1, trio: 3, banda: 4 }),
+  CORPORATIVO: showRule('CORPORATIVO', 'Eventos Corporativos', { solo: 3, trio: 4, banda: 2 }),
+  LANCAMENTO: showRule('LANCAMENTO', 'Lançamentos de Produtos e Inaugurações', {
     solo: 2,
     trio: 4,
     banda: 3,
   }),
-  COQUETEL: showRule('COQUETEL', 'Coquetel / Recepção', { solo: 4, trio: 3, banda: 1 }),
-  FEIRA: showRule('FEIRA', 'Feira / Exposição', { solo: 3, trio: 4, banda: 2 }),
-  CULTURAL: showRule('CULTURAL', 'Evento cultural', { solo: 2, trio: 3, banda: 4 }),
-  FESTIVAL: showRule('FESTIVAL', 'Festival', { solo: 0, trio: 2, banda: 6 }, {
+  COQUETEL: showRule('COQUETEL', 'Coquetéis e Recepções', { solo: 4, trio: 3, banda: 1 }),
+  FEIRA: showRule('FEIRA', 'Feiras e Exposições', { solo: 3, trio: 4, banda: 2 }),
+  CULTURAL: showRule('CULTURAL', 'Eventos Culturais', { solo: 2, trio: 3, banda: 4 }),
+  FESTIVAL: showRule('FESTIVAL', 'Festivais', { solo: 0, trio: 2, banda: 6 }, {
     tieBreak: ['banda', 'trio', 'solo'],
   }),
-  BAR_RESTAURANTE: showRule('BAR_RESTAURANTE', 'Bar / Restaurante', { solo: 4, trio: 3, banda: 1 }),
-  HOTEL: showRule('HOTEL', 'Hotel / Resort', { solo: 3, trio: 4, banda: 2 }),
-  CLUBE: showRule('CLUBE', 'Clube', { solo: 1, trio: 3, banda: 4 }),
-  CONDOMINIO: showRule('CONDOMINIO', 'Condomínio', { solo: 3, trio: 4, banda: 2 }),
+  BAR_RESTAURANTE: showRule('BAR_RESTAURANTE', 'Bares e Restaurantes', { solo: 4, trio: 3, banda: 1 }),
+  HOTEL: showRule('HOTEL', 'Hotéis e Resorts', { solo: 3, trio: 4, banda: 2 }),
+  CLUBE: showRule('CLUBE', 'Eventos em Clubes', { solo: 1, trio: 3, banda: 4 }),
+  CONDOMINIO: showRule('CONDOMINIO', 'Eventos em Condomínios', { solo: 3, trio: 4, banda: 2 }),
   OUTRO: showRule('OUTRO', 'Outro', { solo: 2, trio: 3, banda: 2 }),
 };
 
@@ -188,27 +188,71 @@ export const EVENT_TYPE_ORDER: EventTypeId[] = [
 ];
 
 export const SPACE_OPTIONS: { value: SpaceSize; label: string; hint: string }[] = [
-  { value: 'pequeno', label: 'Pequeno', hint: 'Ambiente intimista ou sala reduzida' },
-  { value: 'medio', label: 'Médio', hint: 'Salão, lounge ou área coberta' },
-  { value: 'grande', label: 'Grande', hint: 'Pista, pavilhão ou área externa ampla' },
+  { value: 'pequeno', label: 'Pequeno', hint: 'Ambiente intimista ou sala reduzida.' },
+  { value: 'medio', label: 'Médio', hint: 'Salão, lounge ou área coberta.' },
+  { value: 'grande', label: 'Grande', hint: 'Pista, área externa ampla ou salão amplo.' },
 ];
 
 export const ACOUSTIC_OPTIONS: { value: Acoustic; label: string; hint: string }[] = [
-  { value: 'delicada', label: 'Acústica delicada', hint: 'Silêncio, reverberação suave, voz em evidência' },
-  { value: 'padrao', label: 'Acústica padrão', hint: 'Som controlado, sem exigência especial' },
-  { value: 'reforco', label: 'Precisa de reforço', hint: 'Ambiente aberto, barulho ou grande volume' },
+  {
+    value: 'delicada',
+    label: 'Ambiente silencioso',
+    hint: 'Mais intimista, com a voz em evidência.',
+  },
+  {
+    value: 'padrao',
+    label: 'Ambiente comum',
+    hint: 'Som controlado, sem exigência especial.',
+  },
+  {
+    value: 'reforco',
+    label: 'Ambiente aberto ou com mais movimento',
+    hint: 'Espaço externo, conversas ou um volume maior de pessoas.',
+  },
 ];
 
-export const PRESENCE_OPTIONS: { value: MusicalPresence; label: string; hint: string }[] = [
-  { value: 'acompanhamento', label: 'Acompanhamento', hint: 'Música elegante, sem roubar a cena' },
-  { value: 'presenca', label: 'Presença musical', hint: 'Momentos marcantes e mais corpo sonoro' },
-  { value: 'impacto', label: 'Impacto de palco', hint: 'Experiência próxima de espetáculo' },
+export const PRESENCE_OPTIONS: {
+  value: MusicalPresence;
+  label: string;
+  hint: string;
+  concepts: string[];
+}[] = [
+  {
+    value: 'acompanhamento',
+    label: 'Acompanhamento',
+    hint: 'Música elegante, presente no ambiente, mas sem roubar a cena.',
+    concepts: ['Atmosfera', 'Elegância', 'Proximidade'],
+  },
+  {
+    value: 'presenca',
+    label: 'Presença Musical',
+    hint: 'Momentos marcantes, com maior presença e mais corpo sonoro.',
+    concepts: ['Equilíbrio', 'Energia', 'Envolvimento'],
+  },
+  {
+    value: 'impacto',
+    label: 'Impacto de Palco',
+    hint: 'Uma experiência de espetáculo, em que a música assume protagonismo.',
+    concepts: ['Palco', 'Energia', 'Espetáculo'],
+  },
 ];
 
 export const STRUCTURE_OPTIONS: { value: TechnicalStructure; label: string; hint: string }[] = [
-  { value: 'minima', label: 'Estrutura mínima', hint: 'Sem palco, som discreto ou ambiente' },
-  { value: 'padrao', label: 'Estrutura padrão', hint: 'PA adequado e ponto de palco, se houver' },
-  { value: 'palco', label: 'Palco completo', hint: 'Palco, backline e passagem de som' },
+  {
+    value: 'minima',
+    label: 'Estrutura Mínima',
+    hint: 'Sem palco, com estrutura simples ou música integrada ao ambiente.',
+  },
+  {
+    value: 'padrao',
+    label: 'Estrutura Padrão',
+    hint: 'Existe um lugar adequado para os músicos e conseguimos montar o som normalmente.',
+  },
+  {
+    value: 'palco',
+    label: 'Palco Completo',
+    hint: 'Estrutura preparada para show, com palco, sistema de som e espaço para uma formação maior.',
+  },
 ];
 
 export const SPACE_SCORES: Record<SpaceSize, ScoreDelta> = {

@@ -62,6 +62,7 @@ export interface EventRule {
 export interface CalculatorAnswers {
   eventType: EventTypeId | '';
   audienceCount: number | '';
+  audienceRange: AudienceRange | '';
   space: SpaceSize | '';
   acoustic: Acoustic | '';
   presence: MusicalPresence | '';
@@ -78,6 +79,12 @@ export interface CompleteAnswers {
   structure: TechnicalStructure;
 }
 
+export interface RecommendationAlternative {
+  format: Format;
+  formatLabel: string;
+  text: string;
+}
+
 export interface Recommendation {
   format: Format;
   formatLabel: string;
@@ -85,12 +92,19 @@ export interface Recommendation {
   formation: string;
   title: string;
   text: string;
+  explanation: string;
+  alternative: RecommendationAlternative | null;
   durationLabel: string;
   durationText: string;
   momentsLabel: string;
   momentsText: string;
   structureText: string;
   audienceLabel: string;
+  audienceRangeLabel: string;
   eventLabel: string;
+  spaceLabel: string;
+  structureLabel: string;
+  acousticLabel: string;
+  presenceLabel: string;
   isCeremony: boolean;
 }

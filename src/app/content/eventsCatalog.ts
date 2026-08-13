@@ -1,7 +1,8 @@
-import type { Format } from '../calculator/types';
+import type { EventTypeId, Format } from '../calculator/types';
 
 export interface CatalogEvent {
   id: string;
+  plannerId: Exclude<EventTypeId, 'OUTRO'>;
   title: string;
   description: string;
   featured?: boolean;
@@ -46,12 +47,14 @@ export const EVENT_GROUPS: CatalogEventGroup[] = [
     items: [
       {
         id: 'casamentos',
+        plannerId: 'CASAMENTO',
         title: 'Casamentos',
         description:
           'Uma experiência musical pensada para acompanhar um dos momentos mais importantes da celebração, da recepção à festa, com repertório e formação alinhados ao estilo dos noivos.',
       },
       {
         id: 'cerimonias',
+        plannerId: 'CERIMONIA',
         title: 'Cerimônias',
         description:
           'Música pensada para acompanhar momentos simbólicos e especiais, como entradas, homenagens, celebrações e outros momentos importantes.',
@@ -61,12 +64,14 @@ export const EVENT_GROUPS: CatalogEventGroup[] = [
       },
       {
         id: 'aniversarios',
+        plannerId: 'ANIVERSARIO',
         title: 'Aniversários',
         description:
           'Música ao vivo para transformar a comemoração em uma experiência ainda mais especial, com repertório adaptado ao perfil do aniversariante e dos convidados.',
       },
       {
         id: 'formaturas',
+        plannerId: 'FORMATURA',
         title: 'Formaturas',
         description:
           'Uma trilha musical para celebrar conquistas e marcar o encerramento de um ciclo, criando uma atmosfera envolvente para formandos, familiares e convidados.',
@@ -79,31 +84,36 @@ export const EVENT_GROUPS: CatalogEventGroup[] = [
     items: [
       {
         id: 'corporativos',
-        title: 'Eventos corporativos',
+        plannerId: 'CORPORATIVO',
+        title: 'Eventos Corporativos',
         description:
           'Apresentações pensadas para confraternizações, encontros empresariais, premiações e eventos institucionais, respeitando o perfil da empresa e da ocasião.',
       },
       {
         id: 'lancamentos',
-        title: 'Lançamentos de produtos e inaugurações',
+        plannerId: 'LANCAMENTO',
+        title: 'Lançamentos de Produtos e Inaugurações',
         description:
           'Música ao vivo para complementar a experiência de marca e criar atmosfera em lançamentos, inaugurações e ativações.',
       },
       {
         id: 'coqueteis',
-        title: 'Coquetéis e recepções',
+        plannerId: 'COQUETEL',
+        title: 'Coquetéis e Recepções',
         description:
           'Uma proposta musical elegante e versátil para momentos de integração, recepção de convidados e eventos sociais ou profissionais.',
       },
       {
         id: 'feiras',
-        title: 'Feiras e exposições',
+        plannerId: 'FEIRA',
+        title: 'Feiras e Exposições',
         description:
           'Apresentações que ajudam a criar uma atmosfera agradável e diferenciada em estandes, feiras, exposições e eventos de relacionamento.',
       },
       {
         id: 'culturais',
-        title: 'Eventos culturais',
+        plannerId: 'CULTURAL',
+        title: 'Eventos Culturais',
         description:
           'Projetos musicais adaptáveis a programações culturais, eventos públicos e iniciativas artísticas, respeitando a proposta de cada ocasião.',
       },
@@ -115,31 +125,36 @@ export const EVENT_GROUPS: CatalogEventGroup[] = [
     items: [
       {
         id: 'festivais',
+        plannerId: 'FESTIVAL',
         title: 'Festivais',
         description:
           'Shows preparados para diferentes tipos de palco e público, com repertório, formação e dinâmica definidos de acordo com a proposta do festival.',
       },
       {
         id: 'bares',
-        title: 'Bares e restaurantes',
+        plannerId: 'BAR_RESTAURANTE',
+        title: 'Bares e Restaurantes',
         description:
           'Música ao vivo pensada para complementar a experiência do ambiente, respeitando a identidade do estabelecimento e o perfil do público.',
       },
       {
         id: 'hoteis',
-        title: 'Hotéis e resorts',
+        plannerId: 'HOTEL',
+        title: 'Hotéis e Resorts',
         description:
           'Apresentações para áreas de convivência, restaurantes, eventos internos, celebrações e experiências especiais para hóspedes.',
       },
       {
         id: 'clubes',
-        title: 'Eventos em clubes',
+        plannerId: 'CLUBE',
+        title: 'Eventos em Clubes',
         description:
           'Música ao vivo para festas, confraternizações, eventos sociais e programações especiais.',
       },
       {
         id: 'condominios',
-        title: 'Eventos em condomínios',
+        plannerId: 'CONDOMINIO',
+        title: 'Eventos em Condomínios',
         description:
           'Apresentações para confraternizações, datas comemorativas e eventos de integração entre moradores, com formato adequado ao espaço.',
       },
@@ -324,7 +339,7 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
   '/calculadora': {
     title: 'Planeje sua Experiência | Ninho Mathias',
     description:
-      'Conte sobre o evento, o espaço e o público e receba uma indicação entre Solo, Trio e Banda.',
+      'Vamos montar juntos a experiência musical ideal para o seu evento, entre Solo, Trio e Banda.',
   },
   '/agende-show': {
     title: 'Agende seu Show | Ninho Mathias',
@@ -332,3 +347,20 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
       'Solicite um orçamento para apresentação ao vivo ou aula de canto com Ninho Mathias.',
   },
 };
+
+export const BOOKABLE_EVENTS = EVENT_GROUPS.flatMap((group) => group.items);
+
+export const LESSON_SCHEDULE_TYPE = 'Aula de Canto';
+
+export const SCHEDULE_EVENT_TYPES: string[] = [
+  LESSON_SCHEDULE_TYPE,
+  ...BOOKABLE_EVENTS.map((event) => event.title),
+];
+
+export function findEventByPlannerId(id: EventTypeId) {
+  return BOOKABLE_EVENTS.find((event) => event.plannerId === id);
+}
+
+export function findEventByTitle(title: string) {
+  return BOOKABLE_EVENTS.find((event) => event.title === title);
+}

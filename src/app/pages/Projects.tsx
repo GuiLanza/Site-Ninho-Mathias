@@ -21,27 +21,17 @@ export function Projects() {
           {MUSICAL_PROJECTS.map((project) => (
             <article
               key={project.id}
-              className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-amber-400/50 transition-all duration-500"
+              className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-amber-400/50 transition-all duration-500 p-8 sm:p-10"
             >
-              <div className="relative h-80 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10" />
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute top-4 right-4 z-20 px-4 py-2 bg-amber-400/90 rounded-full">
-                  <span className="text-black font-semibold text-sm uppercase tracking-wide">
-                    {project.category}
-                  </span>
-                </div>
+              <div className="mb-6">
+                <span className="inline-flex px-4 py-2 bg-amber-400/90 rounded-full text-black font-semibold text-sm uppercase tracking-wide">
+                  {project.category}
+                </span>
               </div>
-              <div className="p-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-amber-400 transition-colors">
-                  {project.title}
-                </h2>
-                <p className="text-white/70 leading-relaxed">{project.description}</p>
-              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-amber-400 transition-colors">
+                {project.title}
+              </h2>
+              <p className="text-white/70 leading-relaxed">{project.description}</p>
             </article>
           ))}
         </div>

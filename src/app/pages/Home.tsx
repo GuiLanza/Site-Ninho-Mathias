@@ -15,11 +15,11 @@ export function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black">
       <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black z-10" />
+        <div className="absolute inset-0 bg-black/55 z-10" />
         <img
-          src="https://images.unsplash.com/photo-1763889784402-5e8744af31b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtdXNpY2lhbiUyMHBlcmZvcm1pbmclMjBndWl0YXIlMjBzdGFnZSUyMGRhcmt8ZW58MXx8fHwxNzcyMTE2MzE2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-          alt="Ninho Mathias em apresentação no palco"
-          className="absolute inset-0 w-full h-full object-cover"
+          src="/em-cena/vocal-palco.jpg"
+          alt="Ninho Mathias cantando no palco"
+          className="absolute inset-0 w-full h-full object-cover object-[center_20%]"
         />
         <div className="relative z-20 text-center px-4">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 tracking-tight">

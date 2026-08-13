@@ -1,10 +1,8 @@
 import { Link } from 'react-router';
-import { EM_CENA_IMAGES, EM_CENA_PREVIEW_IDS } from '../../content/emCena';
+import { getEmCenaPreview } from '../../content/emCena';
 
 export function EmCenaPreview() {
-  const preview = EM_CENA_IMAGES.filter((image) =>
-    EM_CENA_PREVIEW_IDS.includes(image.id as (typeof EM_CENA_PREVIEW_IDS)[number]),
-  );
+  const preview = getEmCenaPreview();
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
@@ -17,32 +15,41 @@ export function EmCenaPreview() {
         </div>
         <Link
           to="/em-cena"
-          className="inline-flex items-center justify-center px-6 py-3 border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black font-bold rounded-full transition-all duration-300"
+          className="inline-flex items-center justify-center px-6 py-3 border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black font-bold rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
         >
           Ver Em Cena
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[160px] md:auto-rows-[220px]">
-        {preview.map((image, index) => (
-          <Link
-            key={image.id}
-            to="/em-cena"
-            className={`group relative overflow-hidden rounded-2xl border border-white/10 ${
-              index === 0 ? 'col-span-2 row-span-2' : ''
-            }`}
-          >
-            <img
-              src={image.src}
-              alt={image.alt}
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-          </Link>
-        ))}
-      </div>
+      {preview.length > 0 ? (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[160px] md:auto-rows-[220px]">
+          {preview.map((image, index) => (
+            <Link
+              key={image.id}
+              to="/em-cena"
+              className={`group relative overflow-hidden rounded-2xl border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                index === 0 ? 'col-span-2 row-span-2' : ''
+              }`}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="rounded-2xl border border-white/10 bg-zinc-900/80 p-8 sm:p-12 text-center">
+          <p className="text-white/70 text-lg leading-relaxed max-w-2xl mx-auto">
+            Em Cena reúne registros reais de apresentações, palco e encontros. A galeria cresce
+            conforme novos momentos são documentados.
+          </p>
+        </div>
+      )}
     </section>
   );
 }

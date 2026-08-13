@@ -1,7 +1,9 @@
-import { CEREMONY_CONFIG, toAudienceRange } from './config';
-import { addScores, recommend } from './engine';
+import { BOOKABLE_EVENTS } from '../content/eventsCatalog';
+import { CEREMONY_CONFIG, EVENT_RULES, toAudienceRange } from './config';
+import { addScores, recommend, toCompleteAnswers } from './engine';
+import { AUDIENCE_RANGE_OPTIONS, AUDIENCE_RANGE_TO_COUNT } from './plannerMapping';
 import { buildWhatsAppMessage } from './whatsapp';
-import type { CompleteAnswers, Format, Scores } from './types';
+import type { AudienceRange, CompleteAnswers, Format, Scores } from './types';
 
 interface Scenario {
   name: string;
@@ -138,11 +140,65 @@ export function verifyCeremonyScenarios(): string[] {
       ...intimista,
     }),
   );
-  assert(whatsapp.includes('Tipo de evento: Cerimônia'), 'WhatsApp deve citar Cerimônia');
+  assert(whatsapp.includes('Tipo de evento: Cerimônias'), 'WhatsApp deve citar Cerimônias');
   assert(whatsapp.includes('Formato recomendado: Solo'), 'WhatsApp deve citar Solo');
   assert(whatsapp.includes('Formação: Voz + Violão'), 'WhatsApp deve citar Voz + Violão');
   assert(whatsapp.includes('70 pessoas'), 'WhatsApp deve usar o público preenchido');
   logs.push('Mensagem de WhatsApp da Cerimônia montada com dados reais');
+
+  for (const option of AUDIENCE_RANGE_OPTIONS) {
+    const derived = toAudienceRange(option.representativeCount);
+    assert(
+      derived === option.value,
+      `Faixa ${option.value}: count ${option.representativeCount} mapeou para ${derived}`,
+    );
+    assert(
+      AUDIENCE_RANGE_TO_COUNT[option.value] === option.representativeCount,
+      `AUDIENCE_RANGE_TO_COUNT desalinhado em ${option.value}`,
+    );
+  }
+  logs.push('Mapeamento de faixas de público alinhado ao motor');
+
+  const fromRange = toCompleteAnswers({
+    eventType: 'CERIMONIA',
+    audienceCount: '',
+    audienceRange: 'ATE_30',
+    ...intimista,
+  });
+  assert(fromRange?.audienceCount === 20, 'Faixa Até 30 deve usar count interno 20');
+  assert(fromRange?.audienceRange === 'ATE_30', 'Faixa escolhida deve ser preservada');
+  logs.push('Jornada por faixa preenche CompleteAnswers sem input numérico');
+
+  const presenceBase = {
+    eventType: 'CASAMENTO' as const,
+    audienceCount: 100,
+    audienceRange: 'DE_81_A_150' as AudienceRange,
+    space: 'medio' as const,
+    acoustic: 'padrao' as const,
+    structure: 'padrao' as const,
+  };
+  const accompaniment = recommend({ ...presenceBase, presence: 'acompanhamento' });
+  const impact = recommend({ ...presenceBase, presence: 'impacto' });
+  assert(
+    impact.scores.banda > accompaniment.scores.banda,
+    'Impacto de palco deve aumentar o score de Banda em relação ao acompanhamento',
+  );
+  assert(
+    accompaniment.format === 'solo' || accompaniment.format === 'trio',
+    'Casamento médio com acompanhamento deve permanecer em Solo ou Trio',
+  );
+  assert(!accompaniment.explanation.includes('pontos'), 'Explicação não deve expor score');
+  logs.push(
+    `Presença musical diferencia scores (Acompanhamento ${accompaniment.format} / Impacto ${impact.format})`,
+  );
+
+  for (const event of BOOKABLE_EVENTS) {
+    assert(
+      EVENT_RULES[event.plannerId].label === event.title,
+      `Taxonomia divergente: ${event.plannerId} (${EVENT_RULES[event.plannerId].label} ≠ ${event.title})`,
+    );
+  }
+  logs.push(`Catálogo e motor compartilham ${BOOKABLE_EVENTS.length} tipos de evento`);
 
   return logs;
 }

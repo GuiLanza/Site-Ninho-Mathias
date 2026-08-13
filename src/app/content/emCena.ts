@@ -13,51 +13,75 @@ export interface EmCenaImage {
 }
 
 /**
- * Cadastro da galeria Em Cena.
- * Para fotos oficiais: coloque os arquivos em `public/em-cena/`
- * e use o caminho `/em-cena/nome-do-arquivo.jpg` no campo `src`.
+ * Galeria Em Cena — única fonte para `/em-cena` e o preview da Home.
+ *
+ * Como adicionar fotos reais:
+ * 1. Coloque o arquivo em `public/em-cena/` (ex.: `public/em-cena/show-01.jpg`)
+ * 2. Cadastre o registro abaixo com `src: '/em-cena/show-01.jpg'`
+ * 3. Marque `featured: true` para aparecer no preview da Home;
+ *    se nenhum for destaque, a Home usa os primeiros registros.
+ *
+ * Não use bancos de imagem. Só registros reais do Ninho Mathias.
  */
 export const EM_CENA_IMAGES: EmCenaImage[] = [
   {
-    id: 'cena-01',
-    src: 'https://images.unsplash.com/photo-1763889784402-5e8744af31b2?auto=format&fit=crop&w=1400&q=80',
-    alt: 'Músico tocando guitarra no palco em luz baixa',
+    id: 'vocal-palco',
+    src: '/em-cena/vocal-palco.jpg',
+    alt: 'Ninho Mathias cantando no palco, com camisa branca e microfone na mão',
     title: 'No palco',
     category: 'Shows',
     featured: true,
   },
   {
-    id: 'cena-02',
-    src: 'https://images.unsplash.com/photo-1735839550903-98b86765a0d2?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Celebração de rua com energia de carnaval',
-    title: 'Bloco Eu Te Devoro',
-    category: 'Projetos',
+    id: 'ensaio-estudio',
+    src: '/em-cena/ensaio-estudio.jpg',
+    alt: 'Ninho Mathias sentado, tocando violão e cantando ao microfone em ambiente de estúdio',
+    title: 'Voz e violão',
+    category: 'Ensaios',
+    featured: true,
   },
   {
-    id: 'cena-03',
-    src: 'https://images.unsplash.com/photo-1767462372391-0b46012657f9?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Banda de rock em apresentação ao vivo',
-    title: 'Tri 80',
-    category: 'Projetos',
+    id: 'show-blacktie-02',
+    src: '/em-cena/show-blacktie-02.jpg',
+    alt: 'Ninho Mathias tocando violão e cantando à frente da banda em palco com tapetes e velas',
+    title: 'Show com banda',
+    category: 'Shows',
+    featured: true,
   },
   {
-    id: 'cena-04',
-    src: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Público acompanhando show ao vivo',
+    id: 'banda-palco',
+    src: '/em-cena/banda-palco.jpg',
+    alt: 'Ninho Mathias e músicos abraçados no palco após a apresentação',
+    title: 'Depois do show',
+    category: 'Shows',
+    featured: true,
+  },
+  {
+    id: 'show-blacktie-01',
+    src: '/em-cena/show-blacktie-01.jpg',
+    alt: 'Ninho Mathias ao microfone no palco, com guitarra, bateria e tela ao fundo',
+    title: 'Presença de palco',
     category: 'Shows',
   },
   {
-    id: 'cena-05',
-    src: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Cantor ao microfone em apresentação',
+    id: 'solo-externo',
+    src: '/em-cena/solo-externo.jpg',
+    alt: 'Ninho Mathias em apresentação solo ao ar livre, tocando violão sob luzes quentes',
+    title: 'Apresentação intimista',
     category: 'Eventos',
   },
   {
-    id: 'cena-06',
-    src: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Detalhe de instrumentos em momento de ensaio',
-    category: 'Ensaios',
+    id: 'entrevista-band',
+    src: '/em-cena/entrevista-band.jpg',
+    alt: 'Ninho Mathias em entrevista ao Jornal Band Minas',
+    title: 'Band Minas',
+    caption: 'Entrevista ao Jornal Band Minas.',
+    category: 'Eventos',
   },
 ];
 
-export const EM_CENA_PREVIEW_IDS = ['cena-01', 'cena-02', 'cena-03', 'cena-05'] as const;
+export function getEmCenaPreview(limit = 4): EmCenaImage[] {
+  const featured = EM_CENA_IMAGES.filter((image) => image.featured);
+  if (featured.length > 0) return featured.slice(0, limit);
+  return EM_CENA_IMAGES.slice(0, limit);
+}

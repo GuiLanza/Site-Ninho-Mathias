@@ -5,12 +5,8 @@ export function ExperienciasHub() {
   return (
     <div>
       <header className="relative min-h-[55vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/55 to-black z-10" />
-        <img
-          src="https://images.unsplash.com/photo-1763889784402-5e8744af31b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtdXNpY2lhbiUyMHBlcmZvcm1pbmclMjBndWl0YXIlMjBzdGFnZSUyMGRhcmt8ZW58MXx8fHwxNzcyMTE2MzE2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(251,191,36,0.14),_transparent_55%),linear-gradient(to_bottom,_#09090b,_#18181b,_#000)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black z-10" />
         <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 text-center py-16 sm:py-20">
           <p className="text-amber-400 text-sm font-bold tracking-[0.25em] uppercase mb-6">
             Experiências Musicais

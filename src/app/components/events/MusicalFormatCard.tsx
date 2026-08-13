@@ -10,7 +10,8 @@ export function MusicalFormatCard({ format }: MusicalFormatCardProps) {
 
   return (
     <article
-      className={`flex flex-col rounded-2xl border p-6 sm:p-8 transition-all duration-300 ${
+      id={format.id}
+      className={`scroll-mt-28 flex flex-col rounded-2xl border p-6 sm:p-8 transition-all duration-300 ${
         isBanda
           ? 'border-amber-400 bg-zinc-900'
           : isTrio
